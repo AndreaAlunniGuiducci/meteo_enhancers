@@ -1,0 +1,39 @@
+// ------------------------------------ general ------------------------------------
+$lateral-space: 0px 5%;
+$bottom-space: 100px;
+
+// ------------------------------------ weather ------------------------------------
+$cloudy-bg: linear-gradient(150deg, #464c64 0%, #99a9b9 100%);
+$cloudy-img: url("./weatherIcons/cloud.png");
+$sunny-bg: linear-gradient(150deg, #5374e7 0%, #77b9f5 100%);
+$sunny-img: url("./weatherIcons/sunny.png");
+$rainy-bg: linear-gradient(150deg, #011354 0%, #5b9fe3 100%);
+$rainy-img: url("./weatherIcons/sunnyRain.png");
+
+.cloudy {
+  background: $cloudy-bg;
+  .icon {
+    height: 103px;
+    width: 90px;
+    background-image: $cloudy-img;
+    background-repeat: no-repeat;
+  }
+}
+.Clear {
+  background: $sunny-bg;
+  .icon {
+    height: 103px;
+    width: 90px;
+    background-image: $sunny-img;
+    background-repeat: no-repeat;
+  }
+}
+.rainy {
+  background: $rainy-bg;
+  .icon {
+    height: 103px;
+    width: 90px;
+    background-image: $rainy-img;
+    background-repeat: no-repeat;
+  }
+}

@@ -1,6 +1,9 @@
+@import '../../variable.module.scss';
+
 .bottomBar {
+  margin: $lateral-space;
   height: 78px;
-  width: 90%;
+  width: 90vw;
   border-radius: 25px;
   background-color: #ffffff;
   box-shadow: 5px 10px 20px 0 rgba(0, 0, 0, 0.17);

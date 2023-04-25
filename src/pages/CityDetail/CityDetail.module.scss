@@ -1,0 +1,128 @@
+@use "../../variable.module.scss";
+@import "../../variable.module.scss";
+
+.cityDetail {
+  padding: $lateral-space;
+  height: 100vh;
+  color: #ffffff;
+  padding-bottom: $bottom-space;
+  overflow: auto;
+}
+.topBarCityDetail {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  .cityName {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 48px;
+    text-align: center;
+  }
+}
+
+.day {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 18px;
+  text-align: center;
+}
+
+.weatherDetail {
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 30px;
+  text-align: center;
+}
+
+.temperature {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 110px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 166px;
+  text-align: right;
+}
+
+.hourTemperature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  div:first-child {
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 18px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  div:last-child {
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 30px;
+    text-align: right;
+    margin-top: 16px;
+  }
+  .point {
+    height: 15px;
+    width: 15px;
+    background-color: #ffffff;
+    border-radius: 50%;
+  }
+}
+
+.hours {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 400vw;
+  .hourTemperature:first-child {
+    div:first-child {
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 0;
+      line-height: 27px;
+      text-align: center;
+    }
+    div:last-child {
+      font-size: 25px;
+      font-weight: bold;
+      letter-spacing: 0;
+      line-height: 38px;
+      text-align: right;
+    }
+    .point {
+      height: 25px;
+      width: 25px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      position: relative;
+      div {
+        height: 2px;
+        width: 400vw;
+        position: absolute;
+        top: -4px;
+        left: 2px;
+        background-color: #ffffff;
+      }
+    }
+  }
+}
+
+.daysContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}

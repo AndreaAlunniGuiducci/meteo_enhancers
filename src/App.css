@@ -1,17 +1,8 @@
 .App {
   text-align: center;
-  padding: 20px 5%;
+  /* padding: 20px 5%; */
+  padding-bottom: 97px;
+  height: 100vh;
+  overflow: hidden;
   font-family: Poppins;
-}
-
-.cloudy {
-  border-radius: 25px;
-  background: linear-gradient(150deg, #464c64 0%, #99a9b9 100%);
-  box-shadow: 5px 10px 20px 0 rgba(0, 0, 0, 0.17);
-}
-.cloudy .icon {
-  height: 103px;
-  width: 90px;
-  background-image: url("./weatherIcons/cloud.png");
-  background-repeat: no-repeat;
 }

@@ -1,43 +1,11 @@
-@import url('../../App.css');
+@use "../../variable.module.scss";
 
 .customCard {
   height: 140px;
   border-radius: 25px;
   color: white;
   margin: 10px 0;
-  // .cloudy {
-  //   border-radius: 25px;
-  //   background: linear-gradient(150deg, #464c64 0%, #99a9b9 100%);
-  //   box-shadow: 5px 10px 20px 0 rgba(0, 0, 0, 0.17);
-  //   .icon {
-  //     height: 103px;
-  //     width: 90px;
-  //     background-image: url("../../weatherIcons/cloud.png");
-  //     background-repeat: no-repeat;
-  //   }
-  // }
-  .sunny {
-    border-radius: 25px;
-    background: linear-gradient(150deg, #5374e7 0%, #77b9f5 100%);
-    box-shadow: 5px 10px 20px 0 rgba(0, 0, 0, 0.17);
-    .icon {
-      height: 103px;
-      width: 90px;
-      background-image: url("../../weatherIcons/sunny.png");
-      background-repeat: no-repeat;
-    }
-  }
-  .rainy {
-    border-radius: 25px;
-    background: linear-gradient(150deg, #011354 0%, #5b9fe3 100%);
-    box-shadow: 5px 10px 20px 0 rgba(0, 0, 0, 0.17);
-    .icon {
-      height: 103px;
-      width: 90px;
-      background-image: url("../../weatherIcons/sunnyRain.png");
-      background-repeat: no-repeat;
-    }
-  }
+  box-shadow: 5px 10px 20px 0 rgba(0, 0, 0, 0.17);
 
   .cardInfo {
     display: flex;
@@ -45,14 +13,6 @@
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-
-    // height: 36px;
-    // width: 84px;
-    // color: #ffffff;
-    // font-size: 15px;
-    // font-weight: 500;
-    // letter-spacing: 0;
-    // line-height: 18px;
 
     .cityName {
       height: 36px;
@@ -62,6 +22,7 @@
       font-weight: 600;
       letter-spacing: 0;
       line-height: 39px;
+      text-align: start;
     }
     .day {
       height: 36px;

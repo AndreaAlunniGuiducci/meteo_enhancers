@@ -1,26 +1,37 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
 
-const initialState = {
-  value: 0,
-}
-
-export const counterSlice = createSlice({
-  name: 'counter',
-  initialState,
-  reducers: {
-    increment: (state) => {
-      state.value += 1
-    },
-    decrement: (state) => {
-      state.value -= 1
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
-    },
-  },
+export const getActualWeather = createAsyncThunk('actualWeather/getActualWeather', async () => {
+  const response = await axios.get('https://api.openweathermap.org/data/2.5/weather?q=Roma,it&units=metric&lang=it&appid=0039d1890945e072a4dec1e182503d52')
+  return response.data
 })
 
-// Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
-
-export default counterSlice.reducer
+export const usersSlice = createSlice({
+  name: 'actualWeather',
+  initialState: {
+    data: {},
+    loading: 'idle',
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getActualWeather.pending, (state, action) => {
+      if (state.loading === 'idle') {
+        state.loading = 'pending'
+      }
+    })
+    builder.addCase(getActualWeather.fulfilled, (state, action) => {
+      if (state.loading === 'pending') {
+        state.data = action.payload
+        state.loading = 'idle'
+      }
+    })
+    builder.addCase(getActualWeather.rejected, (state, action) => {
+      if (state.loading === 'pending') {
+        state.loading = 'idle'
+        state.error = 'Error occured'
+      }
+    })
+  },
+})
+export default usersSlice.reducer
