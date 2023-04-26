@@ -10,13 +10,14 @@ $sunny-img: url("./weatherIcons/sunny.png");
 $rainy-bg: linear-gradient(150deg, #011354 0%, #5b9fe3 100%);
 $rainy-img: url("./weatherIcons/sunnyRain.png");
 
-.cloudy {
+.Clouds {
   background: $cloudy-bg;
   .icon {
     height: 103px;
     width: 90px;
     background-image: $cloudy-img;
     background-repeat: no-repeat;
+    background-position: center;
   }
 }
 .Clear {
@@ -26,14 +27,16 @@ $rainy-img: url("./weatherIcons/sunnyRain.png");
     width: 90px;
     background-image: $sunny-img;
     background-repeat: no-repeat;
+    background-position: center;
   }
 }
-.rainy {
+.Rain {
   background: $rainy-bg;
   .icon {
     height: 103px;
     width: 90px;
     background-image: $rainy-img;
     background-repeat: no-repeat;
+    background-position: center;
   }
 }

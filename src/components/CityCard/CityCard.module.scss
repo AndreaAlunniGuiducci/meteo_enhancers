@@ -16,7 +16,7 @@
 
     .cityName {
       height: 36px;
-      width: 98px;
+      width: 110px;
       color: #ffffff;
       font-size: 26px;
       font-weight: 600;
@@ -26,7 +26,8 @@
     }
     .day {
       height: 36px;
-      width: 84px;
+      width: 98px;
+      margin: 0;
       color: #ffffff;
       font-size: 15px;
       font-weight: 500;
@@ -36,12 +37,13 @@
     }
     .time {
       height: 17px;
-      width: 51px;
+      width: 60px;
       color: #ffffff;
       font-size: 12px;
       font-weight: 300;
       letter-spacing: 0;
       line-height: 18px;
+      margin-top: 6px;
     }
 
     .temperature {
