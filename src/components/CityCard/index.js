@@ -9,12 +9,10 @@ export default function CityCard({
   cityDate,
   coord,
 }) {
-console.log(cityDate)
   weatherClass = weatherClass ?? "";
   cityName = cityName ?? "--";
   temperature = parseInt(temperature) ?? "--";
   coord = JSON.stringify(coord) ?? JSON.stringify({});
-  console.log(cityDate)
   const today = cityDate;
   const dayName = today.toLocaleDateString("en", { weekday: "long" });
   const dayNumber = today.getDate();
@@ -23,13 +21,8 @@ console.log(cityDate)
   const minutes = today.getMinutes();
 
   return (
-    <Link
-      style={{ textDecoration: "none" }}
-      to={`/detail/${btoa(coord)}`}
-    >
-      <Card
-        className={`${styles.customCard} ${styles[weatherClass]}`}
-      >
+    <Link style={{ textDecoration: "none" }} to={`/detail/${btoa(coord)}`}>
+      <Card className={`${styles.customCard} ${styles[weatherClass]}`}>
         <Card.Body>
           <div className={styles.cardInfo}>
             <div>

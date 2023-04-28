@@ -13,10 +13,12 @@ export default function CityDetail() {
   const location = useLocation();
   const navigate = useNavigate();
   const weatherDetailData = useSelector((state) => state.cityWeaterDetail.data);
+  const [weaterList, setWeatherList] = useState([]);
   const [cityName, setCityName] = useState("--");
   const [temperature, setTemperature] = useState("--");
   const [weatherClass, setWeatherClass] = useState("");
   const [date, setDate] = useState(new Date());
+  const [timeZone, setTimeZone] = useState(0);
   const [dateLocation] = useLocationDate();
 
   useEffect(() => {
@@ -38,18 +40,19 @@ export default function CityDetail() {
     if (Object.keys(weatherDetailData).length > 0) {
       const city = weatherDetailData.city;
       const list = weatherDetailData.list;
-      const timeZone = city.timezone * 1000;
+      setTimeZone(city.timezone * 1000);
       setDate(dateLocation(timeZone));
       setCityName(city.name);
       setTemperature(parseInt(list[0].main.temp));
-      setWeatherClass(list[0].weather[0].main)
-      debugger;
+      setWeatherClass(list[0].weather[0].main);
+      setWeatherList(list);
     }
   }, [weatherDetailData]);
+
   return (
     <div className={`${styles[weatherClass]} ${styles.cityDetail}`}>
       <div className={styles.topBarCityDetail}>
-        <img alt="Indietro" src={back}></img>
+        <img alt="Indietro" src={back} onClick={()=>{navigate('/home')}}></img>
         <div className={styles.cityName}>{cityName}</div>
         <img alt="Aggiungi" src={plus}></img>
       </div>
@@ -65,185 +68,61 @@ export default function CityDetail() {
         </div>
         <div style={{ overflowX: "auto" }}>
           <ul className={styles.hours}>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
-            <li className={styles.hourTemperature}>
-              <div>Now</div>
-              <div className={styles.point}>
-                <div></div>
-              </div>
-              <div>22°</div>
-            </li>
+            {weaterList.map((hour, index) => {
+              if (index === 0) {
+                return (
+                  <li key={index} className={styles.hourTemperature}>
+                    <div>Now</div>
+                    <div className={styles.point}>
+                      <div></div>
+                    </div>
+                    <div>{temperature}°</div>
+                  </li>
+                );
+              } else if (index < 8) {
+                const dateDetail = dateLocation(
+                  timeZone,
+                  new Date(hour.dt * 1000).getTime()
+                );
+                const hours = dateDetail.getHours();
+                const minutes = dateDetail.getMinutes();
+                return (
+                  <li key={index} className={styles.hourTemperature}>
+                    <div>
+                      {hours % 12 || 12}:{minutes < 10 ? "0" : ""}
+                      {minutes} {hours > 12 ? "p.m." : "a.m."}
+                    </div>
+                    <div className={styles.point}>
+                      <div></div>
+                    </div>
+                    <div>{parseInt(hour.main.temp)}°</div>
+                  </li>
+                );
+              }
+            })}
           </ul>
         </div>
         <div style={{ overflowX: "auto" }}>
           <div className={styles.daysContainer}>
-            <DayDetailCard />
-            <DayDetailCard />
-            <DayDetailCard />
-            <DayDetailCard />
-            <DayDetailCard />
-            <DayDetailCard />
-            <DayDetailCard />
+            {weaterList.map((hour, index) => {
+              if (hour.dt_txt.slice(11, 13) === "00") {
+                const dateDetail = dateLocation(
+                  timeZone,
+                  new Date(hour.dt * 1000).getTime()
+                );
+                const dayName = dateDetail.toLocaleDateString("en", {
+                  weekday: "long",
+                });
+                return (
+                  <DayDetailCard
+                    key={index}
+                    temperature={parseInt(hour.main.temp)}
+                    weatherClass={hour.weather[0].main}
+                    dayName={dayName}
+                  />
+                );
+              }
+            })}
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const actualWeatherData = useSelector((state) => state.actualWeather.data);
   const savedCitiesData = useSelector((state) => state.savedCities.data);
-  const [dateLocation] = useLocationDate()
+  const [dateLocation] = useLocationDate();
 
   useEffect(() => {
     console.log(actualWeatherData);
@@ -33,7 +33,7 @@ export default function Home() {
     });
   }, [dispatch]);
 
-console.log(actualWeatherData)
+  console.log(actualWeatherData);
   return (
     <Container className={styles.home}>
       <div className={styles.greeting}>

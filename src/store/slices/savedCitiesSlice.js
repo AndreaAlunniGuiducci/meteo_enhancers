@@ -9,7 +9,11 @@ export const getCities = createAsyncThunk("savedCities/getCities", async () => {
 export const savedCitiesSlice = createSlice({
   name: "savedCities",
   initialState: {
-    data: [{"lat":43.110717 ,"lon":12.390828}],
+    data: [
+      { lat: 40.779897, lon: -73.968565 },
+      { lat: 43.110717, lon: 12.390828 },
+      { lat: 55.755826, lon: 37.6173 },
+    ],
     loading: "idle",
     error: null,
   },
