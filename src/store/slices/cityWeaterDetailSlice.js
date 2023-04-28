@@ -1,34 +1,34 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCityWeather } from "../../services/services";
+import { getCityWeaterDetail } from "../../services/services";
 
-export const getActualWeather = createAsyncThunk(
-  "actualWeather/getActualWeather",
+export const getWeatherDetail = createAsyncThunk(
+  "weatherDetail/getWeatherDetail",
   async ([lat, lon, units]) => {
     units = "metric";
-    const response = await getCityWeather(lat, lon, units);
+    const response = await getCityWeaterDetail(lat, lon, units);
     return response.data;
   }
 );
 
-export const cityWeatherSlice = createSlice({
-  name: "actualWeather",
+export const cityWeatherDetailSlice = createSlice({
+  name: "weatherDetail",
   initialState: {
-    data: [],
+    data: {},
     loading: "idle",
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getActualWeather.pending, (state, action) => {
+    builder.addCase(getWeatherDetail.pending, (state, action) => {
       if (state.loading === "idle") {
         state.loading = "pending";
       }
     });
-    builder.addCase(getActualWeather.fulfilled, (state, action) => {
-      state.data = [...state.data, action.payload];
+    builder.addCase(getWeatherDetail.fulfilled, (state, action) => {
+      state.data = action.payload;
       state.loading = "idle";
     });
-    builder.addCase(getActualWeather.rejected, (state, action) => {
+    builder.addCase(getWeatherDetail.rejected, (state, action) => {
       if (state.loading === "pending") {
         state.loading = "idle";
         state.error = `${action.name}: ${action.error.message}`;
@@ -37,4 +37,4 @@ export const cityWeatherSlice = createSlice({
     });
   },
 });
-export default cityWeatherSlice.reducer;
+export default cityWeatherDetailSlice.reducer;

@@ -1,15 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getSavedCity } from "../../services/services";
+import { getCityCoord } from "../../services/services";
 
 export const getCities = createAsyncThunk("savedCities/getCities", async () => {
-  const response = await getSavedCity();
+  const response = await getCityCoord();
   return response.data;
 });
 
 export const savedCitiesSlice = createSlice({
   name: "savedCities",
   initialState: {
-    data: [],
+    data: [{"lat":43.110717 ,"lon":12.390828}],
     loading: "idle",
     error: null,
   },
@@ -22,7 +22,7 @@ export const savedCitiesSlice = createSlice({
     });
     builder.addCase(getCities.fulfilled, (state, action) => {
       if (state.loading === "pending") {
-        state.data = action.payload;
+        state.data = [...state.data, action.payload];
         state.loading = "idle";
       }
     });
