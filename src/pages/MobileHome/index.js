@@ -10,16 +10,15 @@ import { useEffect } from "react";
 import { getActualWeather } from "../../store/slices/cityWeaterSlice";
 import { getCities } from "../../store/slices/savedCitiesSlice";
 import { useLocationDate } from "../../customHooks/useLocatonDate";
+import Loading from "../../components/Loading";
 
-export default function Home() {
+export default function MobileHome() {
   const dispatch = useDispatch();
   const actualWeatherData = useSelector((state) => state.actualWeather.data);
   const savedCitiesData = useSelector((state) => state.savedCities.data);
   const [dateLocation] = useLocationDate();
 
   useEffect(() => {
-    console.log(actualWeatherData);
-    console.log(savedCitiesData);
     savedCitiesData.map((coord) => {
       if (actualWeatherData.length > 0) {
         actualWeatherData.map((city) => {
@@ -33,7 +32,6 @@ export default function Home() {
     });
   }, [dispatch]);
 
-  console.log(actualWeatherData);
   return (
     <Container className={styles.home}>
       <div className={styles.greeting}>

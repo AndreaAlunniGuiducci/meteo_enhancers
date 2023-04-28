@@ -31,7 +31,7 @@ export default function CityDetail() {
       let coord = JSON.parse(atob(coordString));
       dispatch(getWeatherDetail([coord.lat, coord.lon]));
     } catch (e) {
-      console.log(e);
+      console.error(e);
       navigate("/home");
     }
   }, [dispatch]);
