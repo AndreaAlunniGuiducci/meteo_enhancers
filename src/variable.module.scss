@@ -1,7 +1,7 @@
 // ------------------------------------ general ------------------------------------
-$lateral-space: 0px 5%;
-$bottom-space: 100px;
-
+$mobile-lateral-space: 0px 5%;
+$mobile-bottom-space: 100px;
+$desk-bottom-space: 50px;
 // ------------------------------------ weather ------------------------------------
 $cloudy-bg: linear-gradient(150deg, #464c64 0%, #99a9b9 100%);
 $cloudy-img: url("./weatherIcons/cloud.png");

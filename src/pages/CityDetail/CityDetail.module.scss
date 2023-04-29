@@ -2,10 +2,10 @@
 @import "../../variable.module.scss";
 
 .cityDetail {
-  padding: $lateral-space;
+  padding: $mobile-lateral-space;
   height: 100vh;
   color: #ffffff;
-  padding-bottom: $bottom-space;
+  padding-bottom: $mobile-bottom-space;
   overflow: auto;
 }
 .topBarCityDetail {

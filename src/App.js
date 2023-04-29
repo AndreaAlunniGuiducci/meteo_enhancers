@@ -6,11 +6,11 @@ import BottomBar from "./components/BottomBar";
 import { Route, Routes } from "react-router-dom";
 import { Suspense } from "react";
 import Loading from "./components/Loading";
-const MobileHome = lazy(() => import("./pages/MobileHome"));
+const MobileHome = lazy(() => import("./pages/Home"));
 const CityDetail = lazy(() => import("./pages/CityDetail"));
 
 function App() {
-  let screenWidth = window.innerWidth;
+  const screenWidth = window.innerWidth;
   return (
     <div className="App">
       <Routes>
@@ -31,7 +31,7 @@ function App() {
           }
         />
       </Routes>
-      <BottomBar />
+      {screenWidth < 992 ? <BottomBar /> : ""}
     </div>
   );
 }
