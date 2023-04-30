@@ -7,21 +7,17 @@ export default function CityCard({
   cityName,
   temperature,
   cityDate,
-  coord,
 }) {
   weatherClass = weatherClass ?? "";
   cityName = cityName ?? "--";
   temperature = parseInt(temperature) ?? "--";
-  coord = JSON.stringify(coord) ?? JSON.stringify({});
   const today = cityDate;
   const dayName = today.toLocaleDateString("en", { weekday: "long" });
   const dayNumber = today.getDate();
   const month = today.toLocaleDateString("en", { month: "long" });
   const hours = today.getHours();
   const minutes = today.getMinutes();
-
   return (
-    <Link style={{ textDecoration: "none" }} to={`/detail/${btoa(coord)}`}>
       <Card className={`${styles.customCard} ${styles[weatherClass]}`}>
         <Card.Body>
           <div className={styles.cardInfo}>
@@ -40,6 +36,5 @@ export default function CityCard({
           </div>
         </Card.Body>
       </Card>
-    </Link>
   );
 }

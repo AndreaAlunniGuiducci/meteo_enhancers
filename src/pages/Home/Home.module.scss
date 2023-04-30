@@ -51,34 +51,46 @@
 
       .detailCityCard {
         height: 440px;
-        width: 916px;
+        flex: 2;
         border-radius: 25px;
-        background-color: #d8d8d8;
         box-shadow: 5px 10px 20px 0 rgba(0, 0, 0, 0.17);
-        background-color: blue;
+        background-color: #d8d8d8;
         display: flex;
         align-items: center;
+        .cityName,
+        .cityDate,
+        .cityWeather {
+          color: #01175f;
+        }
+        .cityDate {
+          margin: 25px 0;
+        }
         .weatherCard {
           display: flex;
           height: 280px;
           width: 140px;
           border-radius: 0 25px 25px 0;
-          // background: radial-gradient(circle, #5374e7 0%, #77b9f5 100%);
           box-shadow: 5px 10px 20px 0 rgba(0, 0, 0, 0.17);
-          color: #FFFFFF;
+          color: #ffffff;
           margin-left: -50px;
           font-size: 50px;
           font-weight: bold;
           letter-spacing: 0;
           line-height: 76px;
           text-align: right;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
         }
       }
       .citiesListCard {
         height: 440px;
         width: 424px;
-        background-color: green;
+        overflow: scroll;
         margin-left: 50px;
+      }
+      .citiesListCard::-webkit-scrollbar {
+        display: none;
       }
     }
     .bottomPart {

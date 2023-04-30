@@ -23,6 +23,14 @@ function App() {
           }
         />
         <Route
+          path="/home/:coord"
+          element={
+            <Suspense fallback={<Loading />}>
+              <MobileHome />
+            </Suspense>
+          }
+        />
+        <Route
           path="/detail/:coord"
           element={
             <Suspense fallback={<Loading />}>
