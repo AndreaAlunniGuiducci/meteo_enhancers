@@ -94,7 +94,7 @@ export default function Home() {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "flex-start",
-                  justifyContent: "flex-start;",
+                  justifyContent: "flex-start",
                 }}
               >
                 <div className={styles.cityName}>{cityName}</div>

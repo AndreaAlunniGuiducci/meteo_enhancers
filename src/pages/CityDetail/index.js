@@ -51,17 +51,38 @@ export default function CityDetail() {
 
   return (
     <div className={`${styles[weatherClass]} ${styles.cityDetail}`}>
-      <div className={styles.topBarCityDetail}>
-        <img alt="Indietro" src={back} onClick={()=>{navigate('/home')}}></img>
-        <div className={styles.cityName}>{cityName}</div>
-        <img alt="Aggiungi" src={plus}></img>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "stretch",
+        }}
+      >
+        <div className={styles.topBarCityDetail}>
+          <img
+            alt="Indietro"
+            src={back}
+            onClick={() => {
+              navigate("/home");
+            }}
+          ></img>
+          <div className={styles.cityName}>{cityName}</div>
+          <img alt="Aggiungi" src={plus}></img>
+        </div>
+
+        <div className={styles.cityDate}>
+          {date.toLocaleDateString("en", {
+            weekday: "long",
+          })}
+          {date.getDate()},{" "}
+          {date.toLocaleDateString("en", {
+            month: "long",
+          })}
+        </div>
+        <div className={styles.weatherDetail}>{weatherClass}</div>
       </div>
-      <div className={styles.day}>
-        {date.toLocaleDateString("en", { weekday: "long" })} {date.getDate()},{" "}
-        {date.toLocaleDateString("en", { month: "long" })}
-      </div>
+
       <div className={styles.weatherDetail}>
-        <div>{weatherClass}</div>
         <div className={styles.temperature}>
           <div className={styles.icon}></div>
           <div>{temperature}°</div>
