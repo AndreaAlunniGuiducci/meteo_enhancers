@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const baseUrl = "https://api.openweathermap.org";
-const APIKey = "0039d1890945e072a4dec1e182503d52";
-const cityData= "/data/2.5";
+const APIKey = process.env.REACT_APP_API_KEY;
+const cityData = "/data/2.5";
 const cityCoord = "/geo/1.0/direct?";
 
 export const getCityWeather = (lat, lon, units) => {
