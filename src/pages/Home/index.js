@@ -5,11 +5,9 @@ import {
   Row,
   Col,
   Container,
-  Nav,
   Tabs,
   Tab,
   Carousel,
-  CarouselItem,
   InputGroup,
   FormControl,
   Button,
@@ -376,7 +374,7 @@ export default function Home() {
                     onKeyDown={searchCity}
                   />
                   <Button variant="outline-secondary" onClick={searchCity}>
-                    <img src={searchIcon}></img>
+                    <img alt="search" src={searchIcon}></img>
                   </Button>
                 </InputGroup>
               </div>
@@ -384,7 +382,7 @@ export default function Home() {
                 Localization
                 <Button>
                   {" "}
-                  <img src={locationIcon}></img> Add localization{" "}
+                  <img alt="localization" src={locationIcon}></img> Add localization{" "}
                 </Button>
               </div>
             </div>
