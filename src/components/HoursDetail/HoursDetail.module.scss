@@ -1,0 +1,137 @@
+@use "../../variable.module.scss";
+@import "../../variable.module.scss";
+
+.hourTemperature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  div:first-child {
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 18px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  div:last-child {
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 30px;
+    text-align: right;
+    margin-top: 16px;
+  }
+  .point {
+    height: 15px;
+    width: 15px;
+    background-color: #ffffff;
+    border-radius: 50%;
+  }
+}
+.hours {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 150vw;
+  .hourTemperature:first-child {
+    div:first-child {
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 0;
+      line-height: 27px;
+      text-align: center;
+    }
+    div:last-child {
+      font-size: 25px;
+      font-weight: bold;
+      letter-spacing: 0;
+      line-height: 38px;
+      text-align: right;
+    }
+    .point {
+      height: 25px;
+      width: 25px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      position: relative;
+      div {
+        height: 2px;
+        width: 150vw;
+        position: absolute;
+        top: 12px;
+        left: 2px;
+        background-color: #ffffff;
+        margin: 0;
+      }
+    }
+  }
+}
+
+// ------------------------------------- Desktop rules -------------------------------------
+@media screen and (min-width: 992px) {
+  .hourTemperature {
+    flex-direction: row-reverse;
+    div:first-child {
+      //   font-size: 12px;
+      //   font-weight: 300;
+      //   letter-spacing: 0;
+      //   line-height: 18px;
+      //   text-align: center;
+      width: 52px;
+      margin: 0 15px;
+    }
+    div:last-child {
+      //   font-size: 20px;
+      //   font-weight: 300;
+      //   letter-spacing: 0;
+      //   line-height: 30px;
+      //   text-align: right;
+      width: 20px;
+      margin: 0 15px;
+    }
+    // .point {
+    //   height: 15px;
+    //   width: 15px;
+    //   background-color: #ffffff;
+    //   border-radius: 50%;
+    // }
+  }
+
+  .hours {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    .hourTemperature:first-child {
+      margin: 0;
+      //   div:first-child {
+      //     font-size: 18px;
+      //     font-weight: bold;
+      //     letter-spacing: 0;
+      //     line-height: 27px;
+      //     text-align: center;
+      //   }
+      //   div:last-child {
+      // font-size: 25px;
+      // font-weight: bold;
+      // letter-spacing: 0;
+      // line-height: 38px;
+      // text-align: right;
+      //   }
+      .point {
+        // height: 25px;
+        // width: 25px;
+        // background-color: #ffffff;
+        // border-radius: 50%;
+        // position: relative;
+        div {
+          height: 600px;
+          width: 4px;
+          top: 3px;
+          left: 10px;
+        }
+      }
+    }
+  }
+}

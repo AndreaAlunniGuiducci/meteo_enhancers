@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWeatherDetail } from "../../store/slices/cityWeaterDetailSlice";
 import { useLocationDate } from "../../customHooks/useLocatonDate";
+import HoursDetail from "../../components/HoursDetail";
 
 export default function CityDetail() {
   const dispatch = useDispatch();
@@ -88,40 +89,11 @@ export default function CityDetail() {
           <div>{temperature}°</div>
         </div>
         <div style={{ overflowX: "auto" }}>
-          <ul className={styles.hours}>
-            {weaterList.map((hour, index) => {
-              if (index === 0) {
-                return (
-                  <li key={index} className={styles.hourTemperature}>
-                    <div>Now</div>
-                    <div className={styles.point}>
-                      <div></div>
-                    </div>
-                    <div>{temperature}°</div>
-                  </li>
-                );
-              } else if (index < 8) {
-                const dateDetail = dateLocation(
-                  timeZone,
-                  new Date(hour.dt * 1000).getTime()
-                );
-                const hours = dateDetail.getHours();
-                const minutes = dateDetail.getMinutes();
-                return (
-                  <li key={index} className={styles.hourTemperature}>
-                    <div>
-                      {hours % 12 || 12}:{minutes < 10 ? "0" : ""}
-                      {minutes} {hours > 12 ? "p.m." : "a.m."}
-                    </div>
-                    <div className={styles.point}>
-                      <div></div>
-                    </div>
-                    <div>{parseInt(hour.main.temp)}°</div>
-                  </li>
-                );
-              }
-            })}
-          </ul>
+          <HoursDetail
+            weaterList={weaterList}
+            temperature={temperature}
+            timeZone={timeZone}
+          />
         </div>
         <div style={{ overflowX: "auto" }}>
           <div className={styles.daysContainer}>

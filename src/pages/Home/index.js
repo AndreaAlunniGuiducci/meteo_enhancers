@@ -1,6 +1,13 @@
-// 'W3sibGF0IjogNDEuODkzMzIwMywgImxvbiI6MTIuNDgyOTMyMX0sIHsibGF0IjogNTUuNzUwNDQ2MSwgImxvbiI6IDM3LjYxNzQ5NDN9LCB7ImxhdCI6IDM1LjY4MjgzODcsICJsb24iOiAxMzkuNzU5NDU0OX1d'
-
-import { Row, Col, Container } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Container,
+  Nav,
+  Tabs,
+  Tab,
+  Carousel,
+  CarouselItem,
+} from "react-bootstrap";
 import { isEqual } from "lodash";
 import plusSign from "../../icons/Plus.png";
 import CityCard from "../../components/CityCard";
@@ -10,19 +17,48 @@ import { useEffect, useState } from "react";
 import { getActualWeather } from "../../store/slices/cityWeaterSlice";
 import { getCities } from "../../store/slices/savedCitiesSlice";
 import { useLocationDate } from "../../customHooks/useLocatonDate";
-import Loading from "../../components/Loading";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import HoursDetail from "../../components/HoursDetail";
+import { getWeatherDetail } from "../../store/slices/cityWeaterDetailSlice";
+import DayDetailCard from "../../components/DayDetailCard";
 
 export default function Home() {
   const screenWidth = window.innerWidth;
   const dispatch = useDispatch();
+  const weatherDetailData = useSelector((state) => state.cityWeaterDetail.data);
   const actualWeatherData = useSelector((state) => state.actualWeather.data);
   const savedCitiesData = useSelector((state) => state.savedCities.data);
   const [dateLocation] = useLocationDate();
+  const location = useLocation();
   const [cityName, setCityName] = useState("--");
   const [temperature, setTemperature] = useState("--");
   const [weatherClass, setWeatherClass] = useState("");
   const [cityTimezone, setCityTimezone] = useState(0);
+  const [weaterList, setWeatherList] = useState([]);
+  const [timeZone, setTimeZone] = useState(0);
+  const [selectedCity, setSelectedCity] = useState(null);
+
+  useEffect(() => {
+    console.log(location);
+    const stringCoord = location.pathname.slice(6, location.pathname.length);
+    if (stringCoord.trim() !== "") {
+      const coord = JSON.parse(atob(stringCoord));
+      dispatch(getWeatherDetail([coord.lat, coord.lon]));
+    }
+  }, [location]);
+  console.log(weatherDetailData);
+  useEffect(() => {
+    if (Object.keys(weatherDetailData).length > 0) {
+      const city = weatherDetailData.city;
+      const list = weatherDetailData.list;
+      setTimeZone(city.timezone * 1000);
+      setCityName(city.name);
+      setTemperature(parseInt(list[0].main.temp));
+      setWeatherClass(list[0].weather[0].main);
+      setWeatherList(list);
+      setSelectedCity(city.id);
+    }
+  }, [weatherDetailData]);
 
   useEffect(() => {
     if (actualWeatherData.length > 0) {
@@ -31,7 +67,17 @@ export default function Home() {
       setWeatherClass(actualWeatherData[0].weather[0].main);
       setCityTimezone(actualWeatherData[0].timezone * 1000);
     }
+    if (actualWeatherData.length === 1 && !selectedCity) {
+      setSelectedCity(actualWeatherData[0].name);
+      dispatch(
+        getWeatherDetail([
+          actualWeatherData[0].coord.lat,
+          actualWeatherData[0].coord.lon,
+        ])
+      );
+    }
   }, [actualWeatherData]);
+
   useEffect(() => {
     savedCitiesData.map((coord) => {
       if (actualWeatherData.length > 0) {
@@ -45,7 +91,7 @@ export default function Home() {
       }
     });
   }, [dispatch]);
-  console.log(screenWidth);
+
   return (
     <div className={styles.home}>
       {screenWidth < 992 ? (
@@ -101,7 +147,7 @@ export default function Home() {
                 <div className={styles.cityDate}>
                   {dateLocation(cityTimezone).toLocaleDateString("en", {
                     weekday: "long",
-                  })}
+                  })}{" "}
                   {dateLocation(cityTimezone).getDate()},{" "}
                   {dateLocation(cityTimezone).toLocaleDateString("en", {
                     month: "long",
@@ -136,7 +182,58 @@ export default function Home() {
               })}
             </div>
           </div>
-          <div className={styles.bottomPart}>bottom</div>
+          <div className={styles.bottomPart}>
+            <div className={styles.hoursDetail}>
+              <div style={{ marginBottom: "30px" }}>Today</div>
+              <div className={styles.hoursPoint}>
+                <HoursDetail
+                  weaterList={weaterList}
+                  temperature={temperature}
+                  timeZone={timeZone}
+                />
+              </div>
+            </div>
+            <div className={styles.daysDetail}>
+              <Tabs defaultActiveKey="week" id="week-month-tabs">
+                <Tab eventKey="week" title="This week">
+                  <div className={styles.weekDetail}>
+                    <Carousel prevIcon={null} nextIcon={null}>
+                      {weaterList.map((day, index) => {
+                        if (day.dt_txt.slice(11, 13) === "00") {
+                          const dateDetail = dateLocation(
+                            timeZone,
+                            new Date(day.dt * 1000).getTime()
+                          );
+                          const dayName = dateDetail.toLocaleDateString("en", {
+                            weekday: "long",
+                          });
+                          return (
+                            <Carousel.Item
+                              className={styles.detailCardPagination}
+                            >
+                                <DayDetailCard
+                                key={index}
+                                temperature={parseInt(day.main.temp)}
+                                weatherClass={day.weather[0].main}
+                                dayName={dayName}
+                              />
+                            </Carousel.Item>
+                          );
+                        }
+                      })}
+                    </Carousel>
+                  </div>
+                </Tab>
+                <Tab eventKey="month" title="This month">
+                  Tab content for Profile
+                </Tab>
+              </Tabs>
+            </div>
+            <div className={styles.searchLocalization}>
+              <div className={styles.search}></div>
+              <div className={styles.localization}></div>
+            </div>
+          </div>
         </div>
       )}
     </div>
