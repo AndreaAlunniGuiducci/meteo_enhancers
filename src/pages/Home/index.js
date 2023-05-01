@@ -45,6 +45,11 @@ export default function Home() {
   const [selectedCity, setSelectedCity] = useState(null);
   const [dayList, setDayList] = useState([]);
   const [desktopCity, setDesktopCity] = useState([]);
+  const [weaterDetail, setWeatherDetail] = useState("--");
+  const [maxTemp, setMaxTemp] = useState("--");
+  const [minTemp, setMinTemp] = useState("--");
+  const [tempFeel, setTempFeel] = useState("--");
+  const [humidity, setHumidity] = useState("--");
 
   useEffect(() => {
     window.addEventListener("resize", (e) => {
@@ -88,7 +93,7 @@ export default function Home() {
       setCityTimezone(actualWeatherData[0].timezone * 1000);
     }
     if (actualWeatherData.length === 1 && !selectedCity) {
-      setSelectedCity(actualWeatherData[0].name);
+      setSelectedCity(actualWeatherData[0].id);
       dispatch(
         getWeatherDetail([
           actualWeatherData[0].coord.lat,
@@ -100,7 +105,20 @@ export default function Home() {
       const filteredCity = actualWeatherData.filter(
         (city) => city.id !== selectedCity
       );
+      const citySelected = actualWeatherData.find(
+        (city) => city.id === selectedCity
+      );
+      console.log(citySelected);
       setDesktopCity(filteredCity);
+      setCityName(citySelected.name);
+      setTemperature(parseInt(citySelected.main.temp));
+      setWeatherClass(citySelected.weather[0].main);
+      setCityTimezone(citySelected.timezone * 1000);
+      setWeatherDetail(citySelected.weather[0].description);
+      setMaxTemp(parseInt(citySelected.main.temp_max));
+      setMinTemp(parseInt(citySelected.main.temp_min));
+      setHumidity(citySelected.main.humidity);
+      setTempFeel(parseInt(citySelected.main.feels_like));
     }
   }, [actualWeatherData, selectedCity]);
 
@@ -117,7 +135,7 @@ export default function Home() {
       }
     });
   }, [dispatch]);
-  console.log(screenWidth);
+
   return (
     <div className={styles.home}>
       {screenWidth < 992 ? (
@@ -282,25 +300,44 @@ export default function Home() {
                       </Carousel>
                     </div>
                   </Tab>
-                  <Tab eventKey="month" title="This month" disabled>
+                  <Tab eventKey="month" title="This month">
                     <div className={styles.weekDetail}>
-                      <Carousel prevIcon={null} nextIcon={null}>
-                        <div className={styles.detailCardPagination}>
-                          {weaterList.map((day, index) => {
-                            const dateDetail = dateLocation(
-                              timeZone,
-                              new Date(day.dt * 1000).getTime()
-                            );
-                            const dayName = dateDetail.toLocaleDateString(
+                      <div className={`${styles.monthDetail} ${styles[weatherClass]}`}>
+                        <div className={styles.dateIcon} >
+                          <div className={styles.day}>
+                            {dateLocation(cityTimezone).toLocaleDateString(
                               "en",
                               {
-                                weekday: "long",
+                                weekday: "short",
                               }
-                            );
-                            return <Carousel.Item key={index}></Carousel.Item>;
-                          })}
+                            )}
+                            , {dateLocation(cityTimezone).getDate()}{" "}
+                            {dateLocation(cityTimezone).toLocaleDateString(
+                              "en",
+                              {
+                                month: "long",
+                              }
+                            )}
+                          </div>
+                          <div className={styles.icon}></div>
                         </div>
-                      </Carousel>
+                        <div className={styles.detail}>
+                          <div className={styles.temperature}>
+                            {temperature}°
+                          </div>
+                          <div className={styles.weatherDetail}>
+                            {weaterDetail}
+                          </div>
+                          <div className={styles.minMaxTemp}>
+                            The high will be {maxTemp}°C, the low will be{" "}
+                            {minTemp}°C.
+                          </div>
+                          <div className={styles.otherDetail}>
+                            Humidity: {humidity}% <br />
+                            Perceived temperature: {tempFeel}°
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </Tab>
                 </Tabs>

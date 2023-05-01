@@ -27,6 +27,7 @@ $snow-img: url("./weatherIcons/snow.png");
     background-image: $snow-img;
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
   }
 }
 .Drizzle {
@@ -37,6 +38,7 @@ $snow-img: url("./weatherIcons/snow.png");
     background-image: $drizzle-img;
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
   }
 }
 .Mist {
@@ -47,6 +49,7 @@ $snow-img: url("./weatherIcons/snow.png");
     background-image: $misty-img;
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
   }
 }
 .Thunderstorm {
@@ -57,7 +60,7 @@ $snow-img: url("./weatherIcons/snow.png");
     background-image: $thunder-img;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 101px 88px;
+    background-size: cover;
   }
 }
 .Clouds {
@@ -68,6 +71,7 @@ $snow-img: url("./weatherIcons/snow.png");
     background-image: $cloudy-img;
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
   }
 }
 .Clear {
@@ -78,6 +82,7 @@ $snow-img: url("./weatherIcons/snow.png");
     background-image: $sunny-img;
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
   }
 }
 .Rain {
@@ -88,6 +93,7 @@ $snow-img: url("./weatherIcons/snow.png");
     background-image: $rainy-img;
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
   }
 }
 

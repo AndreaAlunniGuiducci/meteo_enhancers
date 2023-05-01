@@ -215,6 +215,54 @@
           overflow: scroll;
         }
       }
+      .monthDetail {
+        height: 304px;
+        width: 504px;
+        border-radius: 20px;
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 5px 10px 20px 0 rgba(0, 0, 0, 0.17);
+        margin: 30px 30px;
+        display: flex;
+        justify-content: space-between;
+        padding: 30px;
+        .dateIcon {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          .day {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 22px;
+          }
+          .icon {
+            height: 91px;
+            width: 124px;
+          }
+        }
+        .detail {
+          color: #ffffff;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: space-between;
+          padding-left: 10px;
+          text-align: start;
+          flex: 2;
+          .temperature {
+            font-size: 36px;
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 55px;
+          }
+          .weatherDetail {
+            font-size: 18px;
+            letter-spacing: 0;
+            line-height: 27px;
+          }
+        }
+      }
     }
   }
 }
