@@ -50,6 +50,7 @@ export default function Home() {
   const [minTemp, setMinTemp] = useState("--");
   const [tempFeel, setTempFeel] = useState("--");
   const [humidity, setHumidity] = useState("--");
+  const [selectedCityName, setSelctedCityName] = useState("--");
 
   useEffect(() => {
     window.addEventListener("resize", (e) => {
@@ -108,17 +109,18 @@ export default function Home() {
       const citySelected = actualWeatherData.find(
         (city) => city.id === selectedCity
       );
-      console.log(citySelected);
-      setDesktopCity(filteredCity);
-      setCityName(citySelected.name);
-      setTemperature(parseInt(citySelected.main.temp));
-      setWeatherClass(citySelected.weather[0].main);
-      setCityTimezone(citySelected.timezone * 1000);
-      setWeatherDetail(citySelected.weather[0].description);
-      setMaxTemp(parseInt(citySelected.main.temp_max));
-      setMinTemp(parseInt(citySelected.main.temp_min));
-      setHumidity(citySelected.main.humidity);
-      setTempFeel(parseInt(citySelected.main.feels_like));
+      if (citySelected) {
+        setDesktopCity(filteredCity);
+        setCityName(citySelected.name);
+        setTemperature(parseInt(citySelected.main.temp));
+        setWeatherClass(citySelected.weather[0].main);
+        setCityTimezone(citySelected.timezone * 1000);
+        setWeatherDetail(citySelected.weather[0].description);
+        setMaxTemp(parseInt(citySelected.main.temp_max));
+        setMinTemp(parseInt(citySelected.main.temp_min));
+        setHumidity(citySelected.main.humidity);
+        setTempFeel(parseInt(citySelected.main.feels_like));
+      }
     }
   }, [actualWeatherData, selectedCity]);
 
@@ -135,7 +137,21 @@ export default function Home() {
       }
     });
   }, [dispatch]);
-
+  const searchCity = (e) => {
+    if (e.key === "Enter" || e.type === 'click') {
+      if (selectedCityName.trim() !== "") {
+        const citySearched = desktopCity.filter((city) =>
+          city.name.toUpperCase().includes(selectedCityName.toUpperCase())
+        );
+        setDesktopCity(citySearched);
+      } else {
+        const filteredCity = actualWeatherData.filter(
+          (city) => city.id !== selectedCity
+        );
+        setDesktopCity(filteredCity);
+      }
+    }
+  };
   return (
     <div className={styles.home}>
       {screenWidth < 992 ? (
@@ -302,8 +318,10 @@ export default function Home() {
                   </Tab>
                   <Tab eventKey="month" title="This month">
                     <div className={styles.weekDetail}>
-                      <div className={`${styles.monthDetail} ${styles[weatherClass]}`}>
-                        <div className={styles.dateIcon} >
+                      <div
+                        className={`${styles.monthDetail} ${styles[weatherClass]}`}
+                      >
+                        <div className={styles.dateIcon}>
                           <div className={styles.day}>
                             {dateLocation(cityTimezone).toLocaleDateString(
                               "en",
@@ -352,8 +370,12 @@ export default function Home() {
                     aria-label="Search"
                     aria-describedby="basic-addon2"
                     size="lg"
+                    onChange={(e) => {
+                      setSelctedCityName(e.target.value);
+                    }}
+                    onKeyDown={searchCity}
                   />
-                  <Button variant="outline-secondary">
+                  <Button variant="outline-secondary" onClick={searchCity}>
                     <img src={searchIcon}></img>
                   </Button>
                 </InputGroup>
