@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 // import MobileHome from "./pages/MobileHome";
@@ -10,7 +10,12 @@ const MobileHome = lazy(() => import("./pages/Home"));
 const CityDetail = lazy(() => import("./pages/CityDetail"));
 
 function App() {
-  const screenWidth = window.innerWidth;
+  const [screenWidth, setscreenWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    window.addEventListener("resize", (e) => {
+      setscreenWidth(e.target.innerWidth);
+    });
+  }, []);
   return (
     <div className="App">
       <Routes>

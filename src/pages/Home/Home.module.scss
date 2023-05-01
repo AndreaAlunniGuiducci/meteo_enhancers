@@ -88,15 +88,19 @@
       .citiesListCard {
         height: 440px;
         width: 424px;
-        overflow: scroll;
+        // overflow: scroll;
         margin-left: 50px;
+        .citiesCard {
+          height: 390px;
+          overflow: scroll;
+        }
       }
     }
     .bottomPart {
       display: flex;
       padding-top: 15px;
       flex-direction: row;
-      align-items: center;
+      align-items: end;
       justify-content: space-between;
       .searchLocalization {
         height: 464px;
@@ -127,7 +131,7 @@
             font-size: 28px;
             font-weight: 600;
             letter-spacing: 0;
-            line-height: 42px;      
+            line-height: 42px;
           }
         }
         .search {
@@ -214,7 +218,7 @@
     }
   }
 }
-.citiesListCard::-webkit-scrollbar,
+.citiesCard::-webkit-scrollbar,
 .hoursPoint::-webkit-scrollbar,
 .weekDetail::-webkit-scrollbar {
   display: none;

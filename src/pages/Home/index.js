@@ -29,7 +29,7 @@ import { getWeatherDetail } from "../../store/slices/cityWeaterDetailSlice";
 import DayDetailCard from "../../components/DayDetailCard";
 
 export default function Home() {
-  const screenWidth = window.innerWidth;
+  const [screenWidth, setscreenWidth] = useState(window.innerWidth);
   const dispatch = useDispatch();
   const weatherDetailData = useSelector((state) => state.cityWeaterDetail.data);
   const actualWeatherData = useSelector((state) => state.actualWeather.data);
@@ -43,23 +43,31 @@ export default function Home() {
   const [weaterList, setWeatherList] = useState([]);
   const [timeZone, setTimeZone] = useState(0);
   const [selectedCity, setSelectedCity] = useState(null);
+  const [dayList, setDayList] = useState([]);
+  const [desktopCity, setDesktopCity] = useState([]);
 
   useEffect(() => {
-    console.log(location);
+    window.addEventListener("resize", (e) => {
+      const screenWidthEvent = e.target.innerWidth;
+      setscreenWidth(screenWidthEvent);
+    });
+  }, []);
+  useEffect(() => {
     const stringCoord = location.pathname.slice(6, location.pathname.length);
     if (stringCoord.trim() !== "") {
       const coord = JSON.parse(atob(stringCoord));
       dispatch(getWeatherDetail([coord.lat, coord.lon]));
     }
   }, [location]);
-  console.log(weatherDetailData);
+
   useEffect(() => {
     if (Object.keys(weatherDetailData).length > 0) {
       const city = weatherDetailData.city;
-      const list = [];
-      weatherDetailData.list.map((day) => {
+      const list = weatherDetailData.list;
+      const dayListArray = [];
+      list.map((day) => {
         if (day.dt_txt.slice(11, 13) === "00") {
-          list.push(day);
+          dayListArray.push(day);
         }
       });
       setTimeZone(city.timezone * 1000);
@@ -68,6 +76,7 @@ export default function Home() {
       setWeatherClass(list[0].weather[0].main);
       setWeatherList(list);
       setSelectedCity(city.id);
+      setDayList(dayListArray);
     }
   }, [weatherDetailData]);
 
@@ -87,7 +96,13 @@ export default function Home() {
         ])
       );
     }
-  }, [actualWeatherData]);
+    if (selectedCity) {
+      const filteredCity = actualWeatherData.filter(
+        (city) => city.id !== selectedCity
+      );
+      setDesktopCity(filteredCity);
+    }
+  }, [actualWeatherData, selectedCity]);
 
   useEffect(() => {
     savedCitiesData.map((coord) => {
@@ -102,7 +117,7 @@ export default function Home() {
       }
     });
   }, [dispatch]);
-
+  console.log(screenWidth);
   return (
     <div className={styles.home}>
       {screenWidth < 992 ? (
@@ -171,26 +186,28 @@ export default function Home() {
               <div className={styles.addCity}>
                 <img alt="Segno più" src={plusSign}></img> Aggiungi città
               </div>
-              {actualWeatherData.map((city, index) => {
-                const timeZone = city.timezone * 1000;
-                return (
-                  <Col key={index}>
-                    <Link
-                      style={{ textDecoration: "none" }}
-                      to={`/home/${btoa(JSON.stringify(city.coord))}`}
-                    >
-                      <CityCard
-                        weatherClass={city.weather[0].main}
-                        cityName={city.name}
-                        temperature={city.main.temp}
-                        cityDate={dateLocation(timeZone)}
-                        coord={city.coord}
-                        scrennWidth={screenWidth}
-                      />
-                    </Link>
-                  </Col>
-                );
-              })}
+              <div className={styles.citiesCard}>
+                {desktopCity.map((city, index) => {
+                  const timeZone = city.timezone * 1000;
+                  return (
+                    <Col key={index}>
+                      <Link
+                        style={{ textDecoration: "none" }}
+                        to={`/home/${btoa(JSON.stringify(city.coord))}`}
+                      >
+                        <CityCard
+                          weatherClass={city.weather[0].main}
+                          cityName={city.name}
+                          temperature={city.main.temp}
+                          cityDate={dateLocation(timeZone)}
+                          coord={city.coord}
+                          scrennWidth={screenWidth}
+                        />
+                      </Link>
+                    </Col>
+                  );
+                })}
+              </div>
             </div>
           </div>
           <div className={styles.bottomPart}>
@@ -212,7 +229,7 @@ export default function Home() {
                       <Carousel prevIcon={null} nextIcon={null}>
                         <Carousel.Item>
                           <div className={styles.detailCardPagination}>
-                            {weaterList.map((day, index) => {
+                            {dayList.map((day, index) => {
                               if (index < 3) {
                                 const dateDetail = dateLocation(
                                   timeZone,
@@ -238,7 +255,7 @@ export default function Home() {
                         </Carousel.Item>
                         <Carousel.Item>
                           <div className={styles.detailCardPagination}>
-                            {weaterList.map((day, index) => {
+                            {dayList.map((day, index) => {
                               if (index > 2) {
                                 const dateDetail = dateLocation(
                                   timeZone,

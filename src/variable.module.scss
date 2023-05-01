@@ -8,8 +8,58 @@ $cloudy-img: url("./weatherIcons/cloud.png");
 $sunny-bg: linear-gradient(150deg, #5374e7 0%, #77b9f5 100%);
 $sunny-img: url("./weatherIcons/sunny.png");
 $rainy-bg: linear-gradient(150deg, #011354 0%, #5b9fe3 100%);
-$rainy-img: url("./weatherIcons/sunnyRain.png");
+$rainy-img: url("./weatherIcons/rain.png");
+$misty-bg: linear-gradient(150deg, #babac1 0%, #94b4d4 100%);
+$misty-img: url("./weatherIcons/mist.png");
+$thunder-bg:linear-gradient(150deg, #000000 0%, #323c46 100%);
+$thunder-img: url("./weatherIcons/thunderstorm.png");
+$drizzle-bg:linear-gradient(150deg, #69738e 0%, #92bde9 100%);
+$drizzle-img: url("./weatherIcons/drizzle.png");
+$snow-bg:linear-gradient(150deg, #d5d5d5 0%, #ffffff 100%);
+$snow-img: url("./weatherIcons/snow.png");
 
+.Snow {
+  background: $snow-bg;
+  color: #000000 !important ;
+  .icon {
+    height: 103px;
+    width: 90px;
+    background-image: $snow-img;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+.Drizzle {
+  background: $drizzle-bg;
+  .icon {
+    height: 103px;
+    width: 90px;
+    background-image: $drizzle-img;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+.Mist {
+  background: $misty-bg;
+  .icon {
+    height: 103px;
+    width: 90px;
+    background-image: $misty-img;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+.Thunderstorm {
+  background: $thunder-bg;
+  .icon {
+    height: 103px;
+    width: 90px;
+    background-image: $thunder-img;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 101px 88px;
+  }
+}
 .Clouds {
   background: $cloudy-bg;
   .icon {
@@ -62,4 +112,3 @@ $rainy-img: url("./weatherIcons/sunnyRain.png");
   line-height: 18px;
   text-align: left;
 }
-
