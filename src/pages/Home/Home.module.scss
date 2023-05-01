@@ -107,12 +107,12 @@
           border-radius: 0 35px 35px 35px;
           background: linear-gradient(150deg, #5374e7 0%, #77b9f5 100%);
           box-shadow: 5px 10px 20px 0 rgba(0, 0, 0, 0.17);
-          display: flex;
           overflow: scroll;
           .detailCardPagination {
             display: flex;
             align-items: center;
             justify-content: space-around;  
+            width: 100%;
           }
         }
       }

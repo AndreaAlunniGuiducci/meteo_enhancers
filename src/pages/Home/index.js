@@ -50,7 +50,12 @@ export default function Home() {
   useEffect(() => {
     if (Object.keys(weatherDetailData).length > 0) {
       const city = weatherDetailData.city;
-      const list = weatherDetailData.list;
+      const list = [];
+      weatherDetailData.list.map((day) => {
+        if (day.dt_txt.slice(11, 13) === "00") {
+          list.push(day);
+        }
+      });
       setTimeZone(city.timezone * 1000);
       setCityName(city.name);
       setTemperature(parseInt(list[0].main.temp));
@@ -198,29 +203,58 @@ export default function Home() {
                 <Tab eventKey="week" title="This week">
                   <div className={styles.weekDetail}>
                     <Carousel prevIcon={null} nextIcon={null}>
-                      {weaterList.map((day, index) => {
-                        if (day.dt_txt.slice(11, 13) === "00") {
-                          const dateDetail = dateLocation(
-                            timeZone,
-                            new Date(day.dt * 1000).getTime()
-                          );
-                          const dayName = dateDetail.toLocaleDateString("en", {
-                            weekday: "long",
-                          });
-                          return (
-                            <Carousel.Item
-                              className={styles.detailCardPagination}
-                            >
+                      <Carousel.Item>
+                        <div className={styles.detailCardPagination}>
+                          {weaterList.map((day, index) => {
+                            if (index < 3) {
+                              const dateDetail = dateLocation(
+                                timeZone,
+                                new Date(day.dt * 1000).getTime()
+                              );
+                              const dayName = dateDetail.toLocaleDateString(
+                                "en",
+                                {
+                                  weekday: "long",
+                                }
+                              );
+                              return (
                                 <DayDetailCard
-                                key={index}
-                                temperature={parseInt(day.main.temp)}
-                                weatherClass={day.weather[0].main}
-                                dayName={dayName}
-                              />
-                            </Carousel.Item>
-                          );
-                        }
-                      })}
+                                  key={index}
+                                  temperature={parseInt(day.main.temp)}
+                                  weatherClass={day.weather[0].main}
+                                  dayName={dayName}
+                                />
+                              );
+                            }
+                          })}
+                        </div>
+                      </Carousel.Item>
+                      <Carousel.Item>
+                        <div className={styles.detailCardPagination}>
+                          {weaterList.map((day, index) => {
+                            if (index > 2) {
+                              const dateDetail = dateLocation(
+                                timeZone,
+                                new Date(day.dt * 1000).getTime()
+                              );
+                              const dayName = dateDetail.toLocaleDateString(
+                                "en",
+                                {
+                                  weekday: "long",
+                                }
+                              );
+                              return (
+                                <DayDetailCard
+                                  key={index}
+                                  temperature={parseInt(day.main.temp)}
+                                  weatherClass={day.weather[0].main}
+                                  dayName={dayName}
+                                />
+                              );
+                            }
+                          })}
+                        </div>
+                      </Carousel.Item>
                     </Carousel>
                   </div>
                 </Tab>

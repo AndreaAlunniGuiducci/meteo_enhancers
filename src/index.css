@@ -12,6 +12,7 @@ code {
     monospace;
 }
 
+ /* ---------------------------------- override bootstrap ----------------------------------  */
 .nav-tabs {
   border-bottom: none !important;
 }
