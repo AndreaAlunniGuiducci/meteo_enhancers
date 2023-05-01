@@ -98,11 +98,73 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      .daysDetail {
+      .searchLocalization {
         height: 464px;
-        width: 564px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        .localization {
+          font-size: 28px;
+          font-weight: 600;
+          letter-spacing: 0;
+          line-height: 42px;
+          text-align: start;
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          justify-content: center;
+          button {
+            height: 140px;
+            width: 374px;
+            border-radius: 25px;
+            background: linear-gradient(150deg, #5374e7 0%, #77b9f5 100%);
+            box-shadow: 5px 10px 20px 0 rgba(0, 0, 0, 0.17);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 42px;      
+          }
+        }
+        .search {
+          height: 140px;
+          width: 374px;
+          text-align: start;
+          font-size: 28px;
+          font-weight: 600;
+          letter-spacing: 0;
+          line-height: 42px;
+          button {
+            height: 140px;
+            width: 56px;
+            border-radius: 25px !important;
+            margin-left: -30px !important;
+            z-index: 999 !important;
+            background: linear-gradient(150deg, #5374e7 0%, #77b9f5 100%);
+            img {
+              color: #ffffff;
+            }
+          }
+          input {
+            height: 140px;
+            width: 374px;
+            border-radius: 25px;
+            background-color: #ffffff;
+            box-shadow: 5px 10px 20px 0 rgba(0, 0, 0, 0.17);
+          }
+        }
+      }
+      .daysDetail {
+        flex: 2;
+        margin: 0 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
         .weekDetail {
-          // height: 464px;
           width: 564px;
           border-radius: 0 35px 35px 35px;
           background: linear-gradient(150deg, #5374e7 0%, #77b9f5 100%);
@@ -111,9 +173,16 @@
           .detailCardPagination {
             display: flex;
             align-items: center;
-            justify-content: space-around;  
+            justify-content: space-around;
             width: 100%;
           }
+        }
+        .monthCard {
+          height: 304px;
+          width: 504px;
+          border-radius: 20px;
+          background-color: rgba(255, 255, 255, 0.1);
+          box-shadow: 5px 10px 20px 0 rgba(0, 0, 0, 0.17);
         }
       }
       .hoursDetail {

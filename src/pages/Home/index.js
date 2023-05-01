@@ -1,3 +1,6 @@
+import searchIcon from "../../icons/Search_white.png";
+import locationIcon from "../../icons/Location_white.png";
+
 import {
   Row,
   Col,
@@ -7,6 +10,9 @@ import {
   Tab,
   Carousel,
   CarouselItem,
+  InputGroup,
+  FormControl,
+  Button,
 } from "react-bootstrap";
 import { isEqual } from "lodash";
 import plusSign from "../../icons/Plus.png";
@@ -199,73 +205,112 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.daysDetail}>
-              <Tabs defaultActiveKey="week" id="week-month-tabs">
-                <Tab eventKey="week" title="This week">
-                  <div className={styles.weekDetail}>
-                    <Carousel prevIcon={null} nextIcon={null}>
-                      <Carousel.Item>
+              <div>
+                <Tabs defaultActiveKey="week" id="week-month-tabs">
+                  <Tab eventKey="week" title="This week">
+                    <div className={styles.weekDetail}>
+                      <Carousel prevIcon={null} nextIcon={null}>
+                        <Carousel.Item>
+                          <div className={styles.detailCardPagination}>
+                            {weaterList.map((day, index) => {
+                              if (index < 3) {
+                                const dateDetail = dateLocation(
+                                  timeZone,
+                                  new Date(day.dt * 1000).getTime()
+                                );
+                                const dayName = dateDetail.toLocaleDateString(
+                                  "en",
+                                  {
+                                    weekday: "long",
+                                  }
+                                );
+                                return (
+                                  <DayDetailCard
+                                    key={index}
+                                    temperature={parseInt(day.main.temp)}
+                                    weatherClass={day.weather[0].main}
+                                    dayName={dayName}
+                                  />
+                                );
+                              }
+                            })}
+                          </div>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                          <div className={styles.detailCardPagination}>
+                            {weaterList.map((day, index) => {
+                              if (index > 2) {
+                                const dateDetail = dateLocation(
+                                  timeZone,
+                                  new Date(day.dt * 1000).getTime()
+                                );
+                                const dayName = dateDetail.toLocaleDateString(
+                                  "en",
+                                  {
+                                    weekday: "long",
+                                  }
+                                );
+                                return (
+                                  <DayDetailCard
+                                    key={index}
+                                    temperature={parseInt(day.main.temp)}
+                                    weatherClass={day.weather[0].main}
+                                    dayName={dayName}
+                                  />
+                                );
+                              }
+                            })}
+                          </div>
+                        </Carousel.Item>
+                      </Carousel>
+                    </div>
+                  </Tab>
+                  <Tab eventKey="month" title="This month" disabled>
+                    <div className={styles.weekDetail}>
+                      <Carousel prevIcon={null} nextIcon={null}>
                         <div className={styles.detailCardPagination}>
                           {weaterList.map((day, index) => {
-                            if (index < 3) {
-                              const dateDetail = dateLocation(
-                                timeZone,
-                                new Date(day.dt * 1000).getTime()
-                              );
-                              const dayName = dateDetail.toLocaleDateString(
-                                "en",
-                                {
-                                  weekday: "long",
-                                }
-                              );
-                              return (
-                                <DayDetailCard
-                                  key={index}
-                                  temperature={parseInt(day.main.temp)}
-                                  weatherClass={day.weather[0].main}
-                                  dayName={dayName}
-                                />
-                              );
-                            }
+                            const dateDetail = dateLocation(
+                              timeZone,
+                              new Date(day.dt * 1000).getTime()
+                            );
+                            const dayName = dateDetail.toLocaleDateString(
+                              "en",
+                              {
+                                weekday: "long",
+                              }
+                            );
+                            return <Carousel.Item key={index}></Carousel.Item>;
                           })}
                         </div>
-                      </Carousel.Item>
-                      <Carousel.Item>
-                        <div className={styles.detailCardPagination}>
-                          {weaterList.map((day, index) => {
-                            if (index > 2) {
-                              const dateDetail = dateLocation(
-                                timeZone,
-                                new Date(day.dt * 1000).getTime()
-                              );
-                              const dayName = dateDetail.toLocaleDateString(
-                                "en",
-                                {
-                                  weekday: "long",
-                                }
-                              );
-                              return (
-                                <DayDetailCard
-                                  key={index}
-                                  temperature={parseInt(day.main.temp)}
-                                  weatherClass={day.weather[0].main}
-                                  dayName={dayName}
-                                />
-                              );
-                            }
-                          })}
-                        </div>
-                      </Carousel.Item>
-                    </Carousel>
-                  </div>
-                </Tab>
-                <Tab eventKey="month" title="This month">
-                  Tab content for Profile
-                </Tab>
-              </Tabs>
+                      </Carousel>
+                    </div>
+                  </Tab>
+                </Tabs>
+              </div>
             </div>
             <div className={styles.searchLocalization}>
-              <div className={styles.search}></div>
-              <div className={styles.localization}></div>
+              <div className={styles.search}>
+                Search
+                <InputGroup className="mb-3">
+                  <FormControl
+                    placeholder="ex.Miami"
+                    aria-label="Search"
+                    aria-describedby="basic-addon2"
+                    size="lg"
+                  />
+                  <Button variant="outline-secondary">
+                    <img src={searchIcon}></img>
+                  </Button>
+                </InputGroup>
+              </div>
+              <div className={styles.localization}>
+                Localization
+                <Button>
+                  {" "}
+                  <img src={locationIcon}></img> Add localization{" "}
+                </Button>
+              </div>
             </div>
           </div>
         </div>
